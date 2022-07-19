@@ -9,28 +9,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.dio.votacao.bbb.api.model.ParametroModel;
-import me.dio.votacao.bbb.api.repository.ParametroRepository;
+import me.dio.votacao.bbb.api.model.ParticipanteModel;
+import me.dio.votacao.bbb.api.repository.ParticipanteRepository;
 
 @RestController
-@RequestMapping("/api/parametros")
-public class ParametroController {
+@RequestMapping("/api/participantes")
+public class ParticipanteController {
 
-	private final ParametroRepository repository;
+	private final ParticipanteRepository repository;
 
-	public ParametroController(ParametroRepository repository) {
+	public ParticipanteController(ParticipanteRepository repository) {
 		this.repository = repository;
 	}
 	
     @PostMapping("/salvar")
-    public ResponseEntity<ParametroModel> salvar(@RequestBody ParametroModel parametro) {
-        ParametroModel entidade = repository.save(parametro);
+    public ResponseEntity<ParticipanteModel> salvar(@RequestBody ParticipanteModel participante) {
+    	ParticipanteModel entidade = repository.save(participante);
         return ResponseEntity.ok(entidade);
     }
 
     @GetMapping("/consultar")
-    public ResponseEntity<ParametroModel> consultar(@RequestParam String chave) {
-        Optional<ParametroModel> optParametro = repository.findById(chave);
+    public ResponseEntity<ParticipanteModel> consultar(@RequestParam String id) {
+        Optional<ParticipanteModel> optParametro = repository.findById(id);
         if (optParametro.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
