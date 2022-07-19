@@ -1,7 +1,9 @@
 package me.dio.votacao.bbb.api.controller;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,7 @@ import me.dio.votacao.bbb.api.repository.ParticipanteRepository;
 
 @RestController
 @RequestMapping("/api/participantes")
+@CrossOrigin
 public class ParticipanteController {
 
 	private final ParticipanteRepository repository;
@@ -36,5 +39,15 @@ public class ParticipanteController {
         }
 
         return ResponseEntity.ok(optParametro.get());
+    }
+    
+    @GetMapping("/todos")
+    public ResponseEntity<List<ParticipanteModel>> consultar() {
+        List<ParticipanteModel> optParametro = repository.findAll();
+        if (optParametro.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(optParametro);
     }
 }

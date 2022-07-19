@@ -16,7 +16,6 @@ public class VotacaoService {
 	}
     
 	public VotacaoService(KafkaTemplate<Object, Object> template) {
-		super();
 		this.template = template;
 	}
       

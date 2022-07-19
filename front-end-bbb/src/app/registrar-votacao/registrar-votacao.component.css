@@ -1,0 +1,8 @@
+.button {
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 8px 15px;
+    border: 2px solid #6665ee;
+    transition: all 0.2s ease;
+}
